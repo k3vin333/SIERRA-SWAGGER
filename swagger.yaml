@@ -21,9 +21,6 @@ paths:
               schema:
                 type: object
                 properties:
-                  CompanyName:
-                    type: string
-                    example: "Spotify Technology SA"
                   Data:
                     type: array
                     items:
