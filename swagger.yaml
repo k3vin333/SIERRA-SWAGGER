@@ -1,0 +1,103 @@
+openapi: 3.0.0
+info:
+  title: SIERRA API ESG
+  version: "1.0.0"
+  description: |
+    Basic swagger setup for SIERRA-Investments. It provides endpoints to retrieve processed
+    ESG (Environmental, Social, Governance) data.
+servers:
+  - url: https://api.sierra-investments.example.com
+    description: Need to fill this out later
+paths:
+  /api/esg:
+    get:
+      summary: Retrieve All Processed ESG Data
+      description: Returns a list of all processed ESG records.
+      responses:
+        '200':
+          description: A JSON object containing ESG records for the company.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  CompanyName:
+                    type: string
+                    example: "Spotify Technology SA"
+                  Data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        Company 1:
+                          type: string
+                          example: "Warner Bros Inc"
+                        Company 2:
+                          type: string
+                          example: "Spotify Technology SA"
+                        Company 3:
+                          type: string
+                          example: "General Motors Co"
+        '500':
+          description: Internal Server Error
+  /api/esg/{company}:
+    get:
+      summary: Retrieve ESG Data for a Specific Company
+      description: Returns ESG records for the specified company.
+      parameters:
+        - in: path
+          name: company
+          required: true
+          schema:
+            type: string
+          description: The name of the company.
+      responses:
+        '200':
+          description: A JSON object containing ESG records for the company.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  CompanyName:
+                    type: string
+                    example: "Spotify Technology SA"
+                  Data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        Category:
+                          type: string
+                          example: "Media"
+                        Score:
+                          type: number
+                          format: integer
+                          example: 1038
+                        Date:
+                          type: string
+                          format: date
+                          example: "2022-04-22"
+                
+        '404':
+          description: Company not found
+          
+  /api/companies:
+    get:
+      summary: Retrieve All Available Companies
+      description: Returns a list of all company names available in the processed ESG data.
+      responses:
+        '200':
+          description: A JSON array of company names.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+                  example:
+                  - "Spotify Co"
+                  - "Walt Disney Co"
+                  - "General Motors Co"
+        '500':
+          description: Internal Server Error
